@@ -11,8 +11,10 @@ api = Api(app)
 class Questions(Resource):
 
 	def get(self):
-		pass
+		questions = Questions.query.all()
 
+		return [ questions ]
+		
 	def post(self):
 		pass
 
