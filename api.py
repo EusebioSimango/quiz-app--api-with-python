@@ -8,11 +8,6 @@ api = Api(app)
 
 
 
-
-
-
-
-
 class Questions(Resource):
 
 	def get(self):
