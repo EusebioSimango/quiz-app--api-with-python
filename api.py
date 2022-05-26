@@ -33,7 +33,7 @@ class QuestionsRepository(Resource):
 		questions = Questions.query.all()
 		
 
-		return questions
+		return str(questions)
 		
 	def post(self):
 		pass
