@@ -29,16 +29,15 @@ class Questions(db.Model):
 
 
 class QuestionsRepository(Resource):
-	def post(self):
-		dataJson = request.get_json()
-
-		return jsonify(dataJson['question'])
-
 	def get(self):
 		questions = Questions.query.all()
 		
-
 		return jsonify(questions)
+
+	def post(self):
+	dataJson = request.get_json()
+
+	return jsonify(dataJson['question'])
 		
  
 
