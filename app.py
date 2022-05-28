@@ -4,7 +4,8 @@ from flask_restful import Resource, Api, reqparse
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///questions'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///questions' local db
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://dmxqmqvaaekgmv:5c90e25e6c4c748186b6fd1c0bd6b53079395d3150fa7d93abbed5b4a22337b4@ec2-44-196-174-238.compute-1.amazonaws.com:5432/d80n33rfkrucbs'
 db = SQLAlchemy(app)
 api = Api(app)
 
