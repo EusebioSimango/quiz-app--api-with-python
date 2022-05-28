@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask , request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, Api, reqparse
 
@@ -29,15 +29,18 @@ class Questions(db.Model):
 
 
 class QuestionsRepository(Resource):
+	def post(self):
+		dataJson = request.get_json()
+
+		return jsonify(dataJson['question'])
 
 	def get(self):
 		questions = Questions.query.all()
 		
 
-		return str(questions)
+		return jsonify(questions)
 		
-	def post(self):
-		pass
+ 
 
 class Home(Resource):
 
@@ -58,4 +61,4 @@ api.add_resource(QuestionsRepository, '/api/questions/all')
 api.add_resource(Home, '/')
 
 if __name__=='__main__':
-	app.run()
+	app.run(debug=True)
