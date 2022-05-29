@@ -1,6 +1,7 @@
 from flask import Flask , request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, Api, reqparse
+import json
 
 
 app = Flask(__name__)
@@ -31,13 +32,22 @@ class Questions(db.Model):
 class QuestionsRepository(Resource):
 	def get(self):
 		questions = Questions.query.all()
-		
-		return jsonify(questions)
+		questions = str(questions).replace("'", '"')
+		questions = json.loads(questions)
+
+		return questions
 
 	def post(self):
-	dataJson = request.get_json()
-
-	return jsonify(dataJson['question'])
+		dataJson = request.get_json()
+		question = dataJson['question']
+		optionA	 = dataJson['optionA']
+		optionB	 = dataJson['optionB']
+		optionC	 = dataJson['optionC']
+		optionD	 = dataJson['optionD']
+		rightAnswer	 = dataJson['rightAnswer']
+		newQuestion = Questions(question=question, optionA=optionA, optionB=optionB, optionC=optionC, optionD=optionD, rightAnswer=rightAnswer)
+		db.session.add(newQuestion)
+		return db.session.commit()
 		
  
 
